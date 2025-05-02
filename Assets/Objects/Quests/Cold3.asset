@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c4aab45a2ea4f48a995072ccc3d934, type: 3}
+  m_Name: Cold3
+  m_EditorClassIdentifier: 
+  questName: Go Ice Fishing! 3
+  questDesc: 
+  questCounter: 0
+  questMaxCounter: 10
+  questItems:
+  - {fileID: 11400000, guid: d72ea2b4ba30ef3439263971d026e7e7, type: 2}
+  - {fileID: 11400000, guid: 12996f69b9dded64eb549e3b96b16054, type: 2}
+  - {fileID: 11400000, guid: 8698eda13f3a3b245a090c2942faea11, type: 2}
+  - {fileID: 11400000, guid: aca45b24980e1c047862c0fb1d167ada, type: 2}
+  - {fileID: 11400000, guid: 8302e98af34c645479a9463a57e5cb15, type: 2}
+  - {fileID: 11400000, guid: ca279fbde5937b34eb5ebfef8e00e1af, type: 2}
+  reward: 95
+  collected: 0
+  completed: 0

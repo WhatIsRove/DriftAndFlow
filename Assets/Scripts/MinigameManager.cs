@@ -13,10 +13,6 @@ public class MinigameManager : MonoBehaviour
 
     public GameObject sectorPrefab;
 
-    void Update()
-    {
-        
-    }
 
     public void GenerateSectors()
     {
@@ -31,35 +27,50 @@ public class MinigameManager : MonoBehaviour
         {
             GameObject sector = Instantiate(sectorPrefab, sectorHolder.transform);
             sector.GetComponent<Slider>().value = Random.Range(sectorAngleRange.x, sectorAngleRange.y);
-            sector.transform.rotation = Quaternion.Euler(0, 0, Random.Range(40, 340));
+            var sectorRot = sector.transform.localEulerAngles;
+            sectorRot.z = Random.Range(40, 340);
+            sector.transform.localEulerAngles = sectorRot;
             sectors.Add(sector);
         }
     }
 
     public bool CheckInput()
     {
+        bool hasClicked = false;
         for (int i = 0; i < sectors.Count; i++)
         {
-            if (pivot.transform.localEulerAngles.z < sectors[i].transform.localEulerAngles.z && pivot.transform.localEulerAngles.z > sectors[i].transform.localEulerAngles.z - (sectors[i].GetComponent<Slider>().value))
+            if (!hasClicked && pivot.transform.localEulerAngles.z < sectors[i].transform.localEulerAngles.z && pivot.transform.localEulerAngles.z > sectors[i].transform.localEulerAngles.z - (sectors[i].GetComponent<Slider>().value))
             {
-                sectors[i].SetActive(false);
+                if (sectors[i].activeSelf)
+                {
+                    sectors[i].SetActive(false);
+                    hasClicked = true;
+                }
             }
 
         }
 
+        bool completed = true;
         for (int i = 0; i < sectors.Count; i++)
         {
-            if (sectors[i].active)
+            if (sectors[i].activeSelf)
             {
-                return false;
+                completed = false;
             }
         }
-        for (int i = 0; i < sectors.Count; i++)
-        {
-            Destroy(sectors[i], 5);
-        }
-        sectors.Clear();
 
-        return true;
+        if (completed)
+        {
+            for (int i = 0; i < sectors.Count; i++)
+            {
+                Destroy(sectors[i], 5);
+            }
+            sectors.Clear();
+            return true;
+        }
+        else return false;
+        
+
+        
     }
 }

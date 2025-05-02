@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8def8b00014195544b52c78d26f0a136, type: 3}
+  m_Name: MagicLootTable
+  m_EditorClassIdentifier: 
+  drops:
+  - item: {fileID: 11400000, guid: 54dde8db3105f0447be08579345e88fa, type: 2}
+    dropChance: 0.1
+  - item: {fileID: 11400000, guid: a87e62f74bac8e44a8ca5f4392216638, type: 2}
+    dropChance: 0.15
+  - item: {fileID: 11400000, guid: 4984c30eb6433134cac27c9e25376501, type: 2}
+    dropChance: 0.2
+  - item: {fileID: 11400000, guid: d19cec77c0b49db498561cf6cae5d8e4, type: 2}
+    dropChance: 0.05
+  - item: {fileID: 11400000, guid: 59c7ee9822b2a5045a23626294591f08, type: 2}
+    dropChance: 0.05
+  - item: {fileID: 11400000, guid: b724353c0a803094c84537afcc19b62f, type: 2}
+    dropChance: 0.1
+  - item: {fileID: 11400000, guid: a6e65e801efabd644bbd6e37c1191aa2, type: 2}
+    dropChance: 0.07
+  - item: {fileID: 11400000, guid: 645ba450d20764a40b64890b449f856f, type: 2}
+    dropChance: 0.1

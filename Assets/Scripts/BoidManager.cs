@@ -11,6 +11,8 @@ public class BoidManager : MonoBehaviour
     public ComputeShader compute;
     Boid[] boids;
 
+    public float baitDistance = 1f;
+
     void Start()
     {
         boids = FindObjectsByType<Boid>(FindObjectsSortMode.None);
@@ -18,7 +20,6 @@ public class BoidManager : MonoBehaviour
         {
             b.Initialize(settings, null);
         }
-
     }
 
     void Update()
@@ -61,6 +62,87 @@ public class BoidManager : MonoBehaviour
             boidBuffer.Release();
         }
     }
+
+    //public void Released()
+    //{
+    //    if (!hasReleased)
+    //    {
+    //        hasReleased = true;
+
+    //        var bobPos = FindObjectOfType<AnchorSpring>().transform.position;
+    //        StartCoroutine(SetBobPos(bobPos));
+
+    //        Boid closestBoid = null;
+    //        float closestDistSqr = Mathf.Infinity;
+
+    //        foreach (Boid boid in boids)
+    //        {
+    //            float distSqr = (boid.position - bobPos).sqrMagnitude;
+    //            if (distSqr < closestDistSqr)
+    //            {
+    //                closestDistSqr = distSqr;
+    //                closestBoid = boid;
+    //            }
+    //        }
+
+    //        if (closestBoid != null)
+    //        {
+    //            closestBoid.isChasingBob = true;
+    //        }
+    //    }
+    //    else return;
+
+    //}
+
+    //IEnumerator SetBobPos(Vector3 bobPos)
+    //{
+    //    yield return new WaitForSeconds(4f);
+    //    _bobPos = bobPos;
+    //}
+
+    //public void Retract()
+    //{
+    //    if (hasReleased)
+    //    {
+    //        hasReleased = false;
+    //        Scare();
+    //    } else
+    //    {
+    //        return;
+    //    }
+    //}
+
+    //public void Scare()
+    //{
+    //    var bobPos = FindObjectOfType<AnchorSpring>().transform.position;
+    //    _bobPos = bobPos;
+
+    //    Boid closestBoid = null;
+    //    float closestDistSqr = Mathf.Infinity;
+
+    //    foreach (Boid boid in boids)
+    //    {
+    //        float distSqr = (boid.position - bobPos).sqrMagnitude;
+    //        if (distSqr < closestDistSqr)
+    //        {
+    //            closestDistSqr = distSqr;
+    //            closestBoid = boid;
+    //        }
+    //    }
+
+    //    if (closestBoid != null)
+    //    {
+    //        closestBoid.isChasingBob = false;
+    //        closestBoid.bobPos = _bobPos;
+    //    }
+    //}
+
+    //IEnumerator SearchForNewFish()
+    //{
+    //    yield return new WaitForSeconds(4f);
+    //    hasReleased = false;
+    //    Released();
+    //}
 
     public struct BoidData
     {

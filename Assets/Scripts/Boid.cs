@@ -30,6 +30,13 @@ public class Boid : MonoBehaviour
     Transform cachedTransform;
     Transform target;
 
+    public Vector3 bobPos;
+    public bool isChasingBob = false;
+
+    bool scared = false;
+
+    Vector3 spawnPosition;
+
     void Awake()
     {
         material = transform.GetComponentInChildren<MeshRenderer>().material;
@@ -43,6 +50,8 @@ public class Boid : MonoBehaviour
 
         position = cachedTransform.position;
         forward = cachedTransform.forward;
+
+        spawnPosition = position;
 
         float startSpeed = (settings.minSpeed + settings.maxSpeed) / 2;
         velocity = transform.forward * startSpeed;
@@ -60,11 +69,17 @@ public class Boid : MonoBehaviour
     {
         Vector3 acceleration = Vector3.zero;
 
-        if (target != null)
+        Vector3 offsetToSpawn = spawnPosition - position;
+        if (offsetToSpawn.magnitude > 0.1f)
         {
-            Vector3 offsetToTarget = (target.position - position);
-            acceleration = SteerTowards(offsetToTarget) * settings.targetWeight;
+            acceleration = SteerTowards(offsetToSpawn) * settings.spawnSteerForce;
         }
+
+        //if (target != null)
+        //{
+        //    Vector3 offsetToTarget = (target.position - position);
+        //    acceleration = SteerTowards(offsetToTarget) * settings.targetWeight;
+        //}
 
         if (numPerceivedFlockmates != 0)
         {
@@ -88,18 +103,28 @@ public class Boid : MonoBehaviour
             acceleration += collisionAvoidForce;
         }
 
+        if (transform.position.y > -1.6f)
+        {
+            Vector3 pos = cachedTransform.position;
+            pos.y = -1.6f;
+
+            Vector3 downwardSteer = Vector3.down * settings.avoidCollisionWeight;
+            acceleration += downwardSteer;
+
+            cachedTransform.position = pos;
+        }
+
+        if (transform.position.y < -10f)
+        {
+            Vector3 upwardSteer = Vector3.up * settings.avoidCollisionWeight * 3f;
+            acceleration += upwardSteer;
+        }
+
         velocity += acceleration * Time.deltaTime;
         float speed = velocity.magnitude;
         Vector3 dir = velocity / speed;
         speed = Mathf.Clamp(speed, settings.minSpeed, settings.maxSpeed);
         velocity = dir * speed;
-        
-        if (cachedTransform.position.y > -1.6)
-        {
-            Vector3 pos = cachedTransform.position;
-            pos.y = -1.7f;
-            cachedTransform.position = pos;
-        }
 
         cachedTransform.position += velocity * Time.deltaTime;
         cachedTransform.forward = dir;
@@ -110,9 +135,12 @@ public class Boid : MonoBehaviour
     bool IsHeadingForCollision()
     {
         RaycastHit hit;
-        if (Physics.SphereCast(position, settings.boundsRadius, forward, out hit, settings.collisionAvoidDst, settings.obstacleMask))
+        if (Physics.SphereCast(position, settings.boundsRadius, forward, out hit, settings.collisionAvoidDst))
         {
-            return true;
+            if (hit.collider.CompareTag("FishAvoid"))
+            {
+                return true;
+            }
         }
         else { }
         return false;

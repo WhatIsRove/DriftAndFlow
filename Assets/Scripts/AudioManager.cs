@@ -64,4 +64,29 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         return s.source.isPlaying;
     }
+
+    public void Pause()
+    {
+        if (GameManager.isPaused)
+        {
+            foreach (var s in sounds)
+            {
+                if (s.source.isPlaying)
+                {
+                    s.source.Pause();
+                }
+            }
+        }
+        else
+        {
+            foreach (var s in sounds)
+            {
+                if (s.source.isPlaying)
+                {
+                    s.source.UnPause();
+                }
+            }
+        }
+        
+    }
 }

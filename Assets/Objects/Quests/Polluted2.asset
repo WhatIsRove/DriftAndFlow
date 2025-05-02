@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c4aab45a2ea4f48a995072ccc3d934, type: 3}
+  m_Name: Polluted2
+  m_EditorClassIdentifier: 
+  questName: Clear Polluted Fish 2
+  questDesc: 
+  questCounter: 0
+  questMaxCounter: 5
+  questItems:
+  - {fileID: 11400000, guid: 392fb51074e425849a50eeb5de35867e, type: 2}
+  - {fileID: 11400000, guid: 79620156877b97541b588d9cdccd5ace, type: 2}
+  - {fileID: 11400000, guid: 746617733c71ef249b22bdc0ec8c6de7, type: 2}
+  - {fileID: 11400000, guid: 1b9e883453880914c934d6dfc2ccb332, type: 2}
+  - {fileID: 11400000, guid: ccd6aab65acb0e848b5df3b09e3f4e53, type: 2}
+  - {fileID: 11400000, guid: d19cec77c0b49db498561cf6cae5d8e4, type: 2}
+  - {fileID: 11400000, guid: 02872607d41d5184e8f8e2a3c1c0d477, type: 2}
+  reward: 30
+  collected: 0
+  completed: 0
