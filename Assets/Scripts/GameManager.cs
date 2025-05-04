@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -14,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public static bool isPaused = false;
 
+    bool newGame = true;
+
     private void Awake()
     {
         if (instance == null)
@@ -22,52 +20,60 @@ public class GameManager : MonoBehaviour
         }
         else Destroy(gameObject);
     }
-
-    private void Start()
+    public void NewGame()
     {
-        //TODO: when saving and loading dont reset, or only reset on new game
+        newGame = true;
+        QuestManager.instance.ResetQuests();
+        int seed = Random.Range(0, 100000);
+        PlayerPrefs.SetInt("WorldSeed", seed);
+        PlayerPrefs.SetInt("Gold", 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
+
+    }
+
+    public void CheckSave()
+    {
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             pauseUI = GameObject.Find("PauseMenu");
-            settingsUI = GameObject.Find("SettingsMenu");                   
+            settingsUI = GameObject.Find("SettingsMenu");
 
             pauseUI.SetActive(false);
             settingsUI.SetActive(false);
+
+            int seed;
+            if (newGame)
+            {
+                newGame = false;
+                QuestManager.instance.ResetQuests();
+                seed = Random.Range(0, 100000);
+                PlayerPrefs.SetInt("WorldSeed", seed);
+            }
+            else
+            {
+                seed = PlayerPrefs.GetInt("WorldSeed");
+            }
 
             //var generator = FindObjectOfType<NoiseDensity>();
             var generators = FindObjectsOfType<NoiseDensity>();
             if (generators != null)
             {
-                int seed;
-                if (PlayerPrefs.HasKey("WorldSeed"))
-                {
-                    seed = PlayerPrefs.GetInt("WorldSeed");
-                }
-                else
-                {
-                    QuestManager.instance.ResetQuests();
-                    seed = Random.Range(0, 100000);
-                    PlayerPrefs.SetInt("WorldSeed", seed);
-                }
+                var meshGens = FindObjectsOfType<MeshGenerator>();
 
-                foreach (var noiseGen in generators) {
+                foreach (var noiseGen in generators)
+                {
                     noiseGen.seed = seed;
                 }
-                
+
+                foreach (var meshGen in meshGens)
+                {
+                    meshGen.Run();
+                }
+
             }
 
         }
-
-    }
-
-    public void NewGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        QuestManager.instance.ResetQuests();
-        int seed = Random.Range(0, 100000);
-        PlayerPrefs.SetInt("WorldSeed", seed);
-        PlayerPrefs.SetInt("Gold", 0);
     }
 
     public void StartGame()

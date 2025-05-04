@@ -19,7 +19,7 @@ MonoBehaviour:
 
     Increases hook rates
     in Temperate waters.'
-  amount: 8
+  amount: 0
   maxAmount: 20
   price: 5
   equipped: 0

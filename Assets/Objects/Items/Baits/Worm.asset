@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Worm
   m_EditorClassIdentifier: 
   baitName: Worm
-  image: {fileID: 0}
+  image: {fileID: -448297692, guid: 68b5d70ca69f8d84480c40025a284702, type: 3}
   description: The common earth worm, fisher's best friend.
-  amount: 20
+  amount: 0
   maxAmount: 20
   price: 0
   equipped: 1

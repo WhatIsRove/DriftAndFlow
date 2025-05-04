@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
+
+//Code adapted from Sebastian Lague's Marching Cubes https://www.youtube.com/watch?v=M3iI2l0ltbE
+
 public class MeshGenerator : MonoBehaviour {
 
     const int threadGroupSize = 8;

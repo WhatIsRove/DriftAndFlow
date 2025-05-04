@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RottonMeat
   m_EditorClassIdentifier: 
   baitName: Rotten Meat
-  image: {fileID: 21300000, guid: 83c13dd2e24696b469a2dc289e45c588, type: 3}
+  image: {fileID: 483756172, guid: 68b5d70ca69f8d84480c40025a284702, type: 3}
   description: 'Smells as bad as it looks..
 
 

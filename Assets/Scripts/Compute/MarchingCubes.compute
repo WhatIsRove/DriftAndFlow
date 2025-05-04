@@ -1,6 +1,8 @@
 ﻿#pragma kernel March
 #include "/Includes/MarchTables.compute"
 
+//Code adapted from Sebastian Lague's Marching Cubes https://www.youtube.com/watch?v=M3iI2l0ltbE
+
 static const int numThreads = 8;
 
 struct Triangle {

@@ -2,6 +2,9 @@
 #include "/Includes/Density.compute"
 #include "/Includes/Noise.compute"
 
+//Code adapted from Sebastian Lague's Marching Cubes https://www.youtube.com/watch?v=M3iI2l0ltbE
+
+
 // Noise settings
 StructuredBuffer<float3> offsets;
 int octaves;

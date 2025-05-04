@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -106,6 +103,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.CheckSave();
         AudioManager.Instance.Play("Engine");
 
         inventory = GameObject.Find("Inventory");
@@ -116,6 +114,7 @@ public class PlayerController : MonoBehaviour
         shop.SetActive(false);
         quests.SetActive(false);
     }
+
 
     void Update()
     {
@@ -327,10 +326,26 @@ public class PlayerController : MonoBehaviour
         moveDir = new Vector3(inputDir.x, 0, inputDir.y);
     }
 
-    void OnTest()
-    {
-        //InventoryManager.instance.AddItem(testTable.GetRandomItem());
-    }
+    //void OnTest()
+    //{
+    //    Debug.Log("Test");
+    //    //InventoryManager.instance.AddItem(testTable.GetRandomItem());
+    //    int seed = Random.Range(0, 100000);
+    //    PlayerPrefs.SetInt("WorldSeed", seed);
+
+    //    var noises = FindObjectsOfType<NoiseDensity>();
+    //    var meshGens = FindObjectsOfType<MeshGenerator>();
+    //    foreach (var noise in noises)
+    //    {
+    //        Debug.Log("Found noises");
+    //        noise.seed = PlayerPrefs.GetInt("WorldSeed");
+    //    }
+
+    //    foreach (var mesh in meshGens)
+    //    {
+    //        mesh.Run();
+    //    }
+    //}
 
     //On Casting Rod
 
@@ -350,17 +365,17 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.isPaused) return;
 
+        if (FindObjectOfType<InventoryManager>().currentEquippedBait.amount <= 0 && (!inventory.activeSelf && !quests.activeSelf && !shop.activeSelf))
+        {
+            popUpItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = FindObjectOfType<InventoryManager>().currentEquippedBait.name;
+            popUpItem.transform.GetChild(1).GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().currentEquippedBait.image;
+            popUpItem.transform.parent.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You're out of bait!";
+            PopUpAnim.SetTrigger("popUp");
+            return;
+        }
+
         if (inventory.activeSelf || shop.activeSelf || quests.activeSelf)
         {
-            if (FindObjectOfType<InventoryManager>().currentEquippedBait.amount <= 0 && (!inventory.activeSelf && !quests.activeSelf && !shop.activeSelf))
-            {
-                popUpItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = FindObjectOfType<InventoryManager>().currentEquippedBait.name;
-                popUpItem.transform.GetChild(1).GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().currentEquippedBait.image;
-                popUpItem.transform.parent.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You're out of bait!";
-                PopUpAnim.SetTrigger("popUp");
-                return;
-            }
-
             return;
         }
 

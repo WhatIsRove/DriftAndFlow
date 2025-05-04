@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Code adapted from Sebastian Lague's Marching Cubes https://www.youtube.com/watch?v=M3iI2l0ltbE
+
 public class NoiseDensity : DensityGenerator {
 
     [Header ("Noise")]

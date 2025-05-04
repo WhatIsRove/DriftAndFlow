@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bloodbait
   m_EditorClassIdentifier: 
   baitName: Bloodbait
-  image: {fileID: 425116115, guid: 68b5d70ca69f8d84480c40025a284702, type: 3}
+  image: {fileID: -1314068469, guid: 68b5d70ca69f8d84480c40025a284702, type: 3}
   description: 'Smells of iron with a deep crimson color..
 
 

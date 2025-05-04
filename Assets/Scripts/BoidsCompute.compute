@@ -26,9 +26,9 @@ void CSMain (int id : SV_DispatchThreadID)
             float sqrDst = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
 
             if (sqrDst < viewRadius * viewRadius) {
-                boids[id.x].numFlockmates += 1;
-                boids[id.x].flockHeading += boidB.direction;
-                boids[id.x].flockCentre += boidB.position;
+                boids[id.x].numFlockmates += 1; //total flock
+                boids[id.x].flockHeading += boidB.direction; //average forward direction
+                boids[id.x].flockCentre += boidB.position; //average position
 
                 if (sqrDst < avoidRadius * avoidRadius) {
                     boids[id.x].separationHeading -= offset / sqrDst;

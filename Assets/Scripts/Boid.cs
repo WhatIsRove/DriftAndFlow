@@ -87,9 +87,12 @@ public class Boid : MonoBehaviour
 
             Vector3 offsetToFlockmatesCentre = (centreOfFlockmates - position);
 
+            //steer boid toward avg direction
             var alignmentForce = SteerTowards(avgFlockHeading) * settings.alignWeight;
+            //steer boid to avg center of group
             var cohesionForce = SteerTowards(offsetToFlockmatesCentre) * settings.cohesionWeight;
-            var seperationForce = SteerTowards(avgAvoidanceHeading) * settings.seperateWeight;
+            //steer boid away from individuals nearby, introducing chaos
+            var seperationForce = SteerTowards(avgAvoidanceHeading) * settings.seperateWeight; 
 
             acceleration += alignmentForce;
             acceleration += cohesionForce;
