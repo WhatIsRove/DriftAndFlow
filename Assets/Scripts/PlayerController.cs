@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.isPaused) return;
 
-        transform.Rotate(0, moveDir.x * turnSpeed * Time.deltaTime, 0);
+        //transform.Rotate(0, moveDir.x * turnSpeed * Time.deltaTime, 0);
 
         var clampedPos = transform.position;
         clampedPos.y = Mathf.Clamp(clampedPos.y, clampHeight.x, clampHeight.y);
@@ -227,6 +227,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (GameManager.isPaused) return;
+
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, moveDir.x * turnSpeed * Time.fixedDeltaTime, 0));
 
         Vector3 currentBobPosition = bob.transform.position;
         bobVelocity = (currentBobPosition - lastBobPosition) / Time.fixedDeltaTime;
@@ -347,8 +349,8 @@ public class PlayerController : MonoBehaviour
     //    }
     //}
 
-    //On Casting Rod
 
+    //On Casting Rod
     private void OnEnable()
     {
         castAction.action.started += OnCastStarted;

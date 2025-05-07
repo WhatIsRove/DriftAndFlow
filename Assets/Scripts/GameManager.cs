@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject settingsUI;
     public static bool isPaused = false;
 
-    bool newGame = true;
+    bool newGame = false;
 
     private void Awake()
     {
@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
             settingsUI.SetActive(false);
 
             int seed;
+
+            //Debug.Log("Checking newGame: " + newGame);
             if (newGame)
             {
                 newGame = false;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 seed = PlayerPrefs.GetInt("WorldSeed");
+                //Debug.Log("Got seed");
             }
 
             //var generator = FindObjectOfType<NoiseDensity>();
