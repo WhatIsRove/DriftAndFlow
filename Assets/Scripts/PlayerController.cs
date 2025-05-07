@@ -373,6 +373,7 @@ public class PlayerController : MonoBehaviour
             popUpItem.transform.GetChild(1).GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().currentEquippedBait.image;
             popUpItem.transform.parent.GetChild(1).GetComponent<TextMeshProUGUI>().text = "You're out of bait!";
             PopUpAnim.SetTrigger("popUp");
+            //CancelRod();
             return;
         }
 
@@ -397,7 +398,12 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.isPaused) return;
 
-        if (inventory.activeSelf || shop.activeSelf || quests.activeSelf || isFishing || FindObjectOfType<InventoryManager>().currentEquippedBait.amount <= 0) return;
+        if (inventory.activeSelf || shop.activeSelf || quests.activeSelf || isFishing) return;
+        if (FindObjectOfType<InventoryManager>().currentEquippedBait.amount <= 0)
+        {
+            CancelRod();
+            return;
+        }
 
         if (!hasReleased)
         {
