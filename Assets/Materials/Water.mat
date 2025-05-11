@@ -54,7 +54,7 @@ Material:
     - _Strength: 0.08
     - _TimeScale: 50
     m_Colors:
-    - _Deep_Water_Color: {r: 0.54737633, g: 0.3297481, b: 0.7358524, a: 0.83137256}
+    - _Deep_Water_Color: {r: 0.91508895, g: 0.15971194, b: 0.16860484, a: 0.83137256}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shallow_Water_Color: {r: 0.5154415, g: 0.7312336, b: 0.764151, a: 0.6117647}
     - _Tiling: {r: 10, g: 10, b: 0, a: 0}
